@@ -72,7 +72,7 @@
 {
     NSMutableString * tempStr = [NSMutableString string];
     for (MYKeyValueObject * obj in _cacheList) {
-        [tempStr appendString:[NSString stringWithFormat:@"%@:%@\n",obj.key,obj.value]];
+        [tempStr appendString:[NSString stringWithFormat:@"%@ = %@\n",obj.key,obj.value]];
     }
     return tempStr.copy;
 }

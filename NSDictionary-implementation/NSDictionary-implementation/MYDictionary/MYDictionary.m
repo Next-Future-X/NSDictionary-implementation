@@ -11,11 +11,11 @@
 #import "MYKeyValueObject.h"
 
 //存储key的初始哈希值
-static const int originHashCode     = 5381;
+static const NSUInteger originHashCode     = 5381;
 //存储key的取余
-static const int remainderHashCode  = 1013;
+static const NSUInteger remainderHashCode  = 1013;
 //字典中最多能存放linkedArray的个数 (由获取hashCode的函数决定)
-static const int linkedArrayCount   = 1014;
+static const NSUInteger linkedArrayCount   = 1014;
 
 @implementation MYDictionary
 {
@@ -32,7 +32,7 @@ static const int linkedArrayCount   = 1014;
     if (!key || !object) {
         return;
     }
-    int keyHash = [self getDictionaryKeyHashCodeWithKey:key];
+    NSUInteger keyHash = [self getDictionaryKeyHashCodeWithKey:key];
     MYKeyValueObject * currentObj = [MYKeyValueObject createWithKey:key andValue:object];
     MYLinkedArray * currentArr = _dictList[keyHash];
     if (currentArr) {
@@ -56,7 +56,7 @@ static const int linkedArrayCount   = 1014;
     if (!key) {
         return nil;
     }
-    int keyHash = [self getDictionaryKeyHashCodeWithKey:key];
+    NSUInteger keyHash = [self getDictionaryKeyHashCodeWithKey:key];
     MYLinkedArray * currentArr = _dictList[keyHash];
     if (currentArr && currentArr.length) {
         for (int i = 0; i < currentArr.length; i++) {
@@ -75,7 +75,7 @@ static const int linkedArrayCount   = 1014;
     if (!key) {
         return;
     }
-    int keyHash = [self getDictionaryKeyHashCodeWithKey:key];
+    NSUInteger keyHash = [self getDictionaryKeyHashCodeWithKey:key];
     MYLinkedArray * currentArr = _dictList[keyHash];
     if (currentArr && currentArr.length) {
         for (int i = 0; i < currentArr.length; i++) {
@@ -118,13 +118,13 @@ static const int linkedArrayCount   = 1014;
     return tempArray.copy;
 }
 
-- (int)getDictionaryKeyHashCodeWithKey:(NSString *)key
+- (NSUInteger)getDictionaryKeyHashCodeWithKey:(NSString *)key
 {
-    int totalHash = originHashCode;
-    for (int i = 0; i < key.length; i++) {
-        unichar charCode = [key characterAtIndex:i];
-        totalHash = totalHash * 33 + charCode;
-    }
+    NSUInteger totalHash = originHashCode * 33 + key.hash;
+//    for (int i = 0; i < key.length; i++) {
+//        unichar charCode = [key characterAtIndex:i];
+//        totalHash = totalHash * 33 + charCode;
+//    }
     return totalHash % remainderHashCode;
 }
 

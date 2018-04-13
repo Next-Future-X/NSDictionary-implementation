@@ -22,7 +22,7 @@
     
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (IBAction)testMYDictionary:(UIButton *)sender
 {
     MYDictionary * tempDict = [MYDictionary dictionary];
     [tempDict setObject:@"xiaoming" forKey:@"ace"];
@@ -37,9 +37,27 @@
     
     [tempDict removeObjectForKey:@"平"];
     [tempDict removeObjectForKey:@"ace"];
+    [tempDict removeObjectForKey:@"=-="];
     NSLog(@"%@",tempDict);
 }
-
+- (IBAction)testNSDictionary:(UIButton *)sender
+{
+    NSMutableDictionary * tempDict = [NSMutableDictionary dictionary];
+    [tempDict setObject:@"xiaoming" forKey:@"ace"];
+    [tempDict setObject:@23 forKey:@"bbe"];
+    [tempDict setObject:@"no234" forKey:@"ace"];
+    [tempDict setObject:@"dfdfd" forKey:@"这里是可以啊"];
+    [tempDict setObject:@"93943.908" forKey:@"9089"];
+    [tempDict setObject:@"小红花" forKey:@"平"];
+    NSLog(@"%@",tempDict);
+    
+    NSLog(@"object====%@",[tempDict objectForKey:@"dfdf"]);
+    
+    [tempDict removeObjectForKey:@"平"];
+    [tempDict removeObjectForKey:@"ace"];
+    [tempDict removeObjectForKey:@"=-="];
+    NSLog(@"%@",tempDict);
+}
 
 
 //测试OC数组插入数据
